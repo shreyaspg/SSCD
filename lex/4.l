@@ -1,0 +1,21 @@
+%{
+	#include<stdio.h>
+	int s=0,m=0,mlc=0;
+%}
+%%
+"//" {s++;fprintf(yyout,"\n");}
+"/*" {m++;mlc=1;fprintf(yyout," ");}
+"*/" {mlc=0;fprintf(yyout," ");}
+. {if(mlc==1) fprintf(yyout," "); else fprintf(yyout,"%s",yytext);}
+%%
+int yywrap(){
+	return 1;
+}
+
+int main()
+{
+	yyin=fopen("t.txt","r");
+	yyout=fopen("o.txt","w");
+	yylex();
+	printf("%d %d",s,m);
+}

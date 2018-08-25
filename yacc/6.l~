@@ -1,0 +1,17 @@
+%{
+	#include"y.tab.h"
+%}
+%%
+[\t \n] ;
+"if" return FOR;
+[0-9]+ return DIG;
+"=" return EQU;
+"==" return EQUU;
+"<=" return LEQ;
+">=" return GEQ;
+"<" return LS;
+">" return GS;
+"!=" return NOT;
+[a-zA-Z]+ return ID;
+. return yytext[0];
+%%
